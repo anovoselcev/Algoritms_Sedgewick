@@ -114,13 +114,14 @@ public:
             tmp_odd->next = next_odd;
             next_odd->prev = tmp_odd;
             tmp_even->next = next_even;
-            if(next_even)
+            if (next_even)
                 next_even->prev = tmp_even;
             tmp_odd = next_odd;
             tmp_even = next_even;
             current = tmp_even;
         }
         tmp_odd->next = start_even;
+        if (start_even) start_even->prev = tmp_odd;
     }
 
     ~List() {
