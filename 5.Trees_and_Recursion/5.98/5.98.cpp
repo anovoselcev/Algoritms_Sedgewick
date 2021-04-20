@@ -5,6 +5,7 @@
 template<typename T>
 struct Node{
     T value;
+    Node* root = nullptr;
     Node* next = nullptr;
 };
 
@@ -17,7 +18,7 @@ template<typename T>
 Node<T>* traverse(Node<T>** graph) {
     if (!graph) return nullptr;
     std::stack<Node<T>*> stack;
-    std::unordered_map<Node<T>*, check> visited;
+    std::unordered_map<Node<T>*, check> visited = { {nullptr, {true}} };
     stack.push(graph[0]);
     while (!stack.empty()) {
         auto tmp = stack.top();
@@ -30,7 +31,7 @@ Node<T>* traverse(Node<T>** graph) {
         visited[tmp].done = true;
 
         while (tmp->next) {
-            if(!visited[tmp->next].done) stack.push(tmp->next);
+            if(!visited[tmp->root].done) stack.push(tmp->root);
             tmp = tmp->next;
         }
 
